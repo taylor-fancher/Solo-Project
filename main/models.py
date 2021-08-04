@@ -8,10 +8,10 @@ class UserManager(models.Manager):
 
         EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$")
 
-        if len(postData["first_name"]) < 4:
-            errors["first_name"] = "First Name must be at least 4 characters."
-        if len(postData["last_name"]) < 4:
-            errors["last_name"] = "Last Name must be at least 4 characters."
+        if len(postData["first_name"]) < 3:
+            errors["first_name"] = "First Name must be at least 3 characters."
+        if len(postData["last_name"]) < 2:
+            errors["last_name"] = "Last Name must be at least 2 characters."
         if not EMAIL_REGEX.match(postData["email"]):
             errors["email"] = "Invalid Email Address"
         if len(postData["password"]) < 8:
@@ -55,7 +55,7 @@ class RetailerManager(models.Manager):
             errors["retailer"] = "Retailer name must be at least 3 characters."
         if len(postData["type"]) < 6:
             errors["type"] = "Retail type must be defined."
-        if len(postData["specialty"]) < 7:
+        if len(postData["specialty"]) < 5:
             errors["specialty"] = "Retailer specialty must be defined."
         if len(postData["city"]) > 15:
             errors["city"] = "City cannot be longer than 15 characters."

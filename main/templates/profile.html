@@ -21,12 +21,12 @@
                     <h6><a href="/retailer/{{review.retailer.id}}">{{review.retailer.retailer}}</a></h6>
                     <p>{{review.retailer.type}} | {{review.retailer.specialty}}</p>
                     <p>{{review.review}}</p>
-                    <p><a href="review/{{review.id}}/id">Edit</a> | <a href="/review/{{review.id}}/delete">Delete</a>
+                    <p><a href="review/{{review.id}}/edit">Edit</a> | <a href="/review/{{review.id}}/delete">Delete</a>
                     </p>
                 </div>
                 {% endfor %}
                 <a href="/user/{{user.id}}">View All Reviews</a>
-                <a href="/add_retainer">Add A Retailer</a>
+                <a href="/add_retailer">Add A Retailer</a>
                 <a href="/add_review">Add A Review</a>
             </div>
             <div class="profile_changes col-md-5">

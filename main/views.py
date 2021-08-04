@@ -167,7 +167,7 @@ def create_review2(request):
     if len(errors) > 0:
         for k, v in errors.items():
             messages.error(request, v)
-        return redirect(f'/retailer/{id}')
+        return redirect('/add_review')
 
     review1 = Review.objects.create(
         review = request.POST['review'],
@@ -215,5 +215,27 @@ def like4(request, id):
     review.likes.add(user)
     return redirect(f'/user/{user.id}')
 
+def edit_review(request, id):
+    context = {
+        'review': Review.objects.get(id=id)
+    }
+    return render(request, 'edit_review.html', context)
+
+def update_review(request, id):
+    errors = Review.objects.review_validator(request.POST)
+    
+    if len(errors) > 0:
+        for k, v in errors.items():
+            messages.error(request, v)
+        return redirect('/edit_review')
+
+    review = Review.objects.get(id=id)
+    review.review = request.POST['review']
+    return redirect('/profile')
+
+def delete_review(request, id):
+    review = Review.objects.get(id=id)
+    review.delete()
+    return redirect('/profile')
 
 # Create your views here.

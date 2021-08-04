@@ -23,5 +23,8 @@ urlpatterns = [
     path('review/<int:id>/like3', views.like3),
     path('review/<int:id>/like4', views.like4),
     path('add_review', views.add_review),
-    path('create_review2', views.create_review2)
+    path('create_review2', views.create_review2),
+    path('review/<int:id>/edit', views.edit_review),
+    path('update_review', views.update_review),
+    path('review/<int:id>/delete', views.delete_review),
 ]
