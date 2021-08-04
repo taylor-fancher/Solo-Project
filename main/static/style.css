@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-image: url(./cardboard.png);
+    background-color: #4F5D75;
+    color: #2d3142;
+}
+
+a {
+    color: #99EDCC;
+}
+

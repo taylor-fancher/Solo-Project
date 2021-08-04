@@ -1,0 +1,36 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Retail Review - Reviews by {{author.first_name}} {{author.last_name}}</title>
+</head>
+
+<body>
+    <div class="container">
+        <p class="text-end"><a href="/home">Home</a> | <a href="/profile">Your Account</a> | <a
+                href="/logout">Logout</a></p>
+        <h2>Reviews by {{author.first_name}}</h2>
+        <div class="about border border-3 border-dark m-2 p-2">
+            <h4>About this reviewer:</h4>
+            <p>{{author.first_name}} {{author.last_name}}</p>
+            <p>{{author.email}}</p>
+            <p>Joined: {{author.created_at}}</p>
+        </div>
+        <div class="all-reviews ">
+            <h4>Reviews written by this user:</h4>
+            {% for review in reviews %}
+            <div class="review border border-3 border-dark mb-2 p-2">
+                <h6><a href="/retailer/{{review.retailer.id}}">{{review.retailer.retailer}}</a></h6>
+                <p>{{review.retailer.type}} | {{review.retailer.specialty}} | {{review.retailer.city}},
+                    {{review.retailer.state}}</p>
+                <p>{{review.review}}</p>
+                <p><a href="/review/{{review.id}}/like4">Like</a> | {{review.likes.count}} Like(s)</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
