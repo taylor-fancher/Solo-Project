@@ -33,7 +33,7 @@
             <div class="recent_retailers col-md-5">
                 <h4>Recently Added Retailers</h4>
                 {% for retailer in retailers %}
-                <div class="retailer border border-3 border-dark p-2">
+                <div class="retailer border border-3 border-dark p-2 m-2">
                     <h6><a href="/retailer/{{retailer.id}}">{{retailer.retailer}}</a></h6>
                     <p>{{retailer.type}} | {{retailer.specialty}}</p>
                     <p>{{retailer.city}}, {{retailer.state}}</p>
