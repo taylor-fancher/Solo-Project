@@ -231,6 +231,7 @@ def update_review(request, id):
 
     review = Review.objects.get(id=id)
     review.review = request.POST['review']
+    review.save()
     return redirect('/profile')
 
 def delete_review(request, id):
