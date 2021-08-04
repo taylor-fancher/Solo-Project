@@ -13,7 +13,7 @@
     <div class="container">
         <p class="text-end"><a href="/home">Home</a> | <a href="/profile">Your Account</a> | <a
                 href="/logout">Logout</a></p>
-        <h2>Edit your review of {{review.retailer}}</h2>
+        <h2>Edit your review of {{review.retailer.retailer}}</h2>
         {% if messages %}
         {% for message in messages %}
         <ul>
@@ -21,7 +21,7 @@
         </ul>
         {% endfor %}
         {% endif %}
-        <form action="/update_review" method='POST'>
+        <form action="/review/{{review.id}}/update" method='POST'>
             {% csrf_token %}
             <input type="hidden" value='{{review.retailer}}' name='retailer'>
             <label for="review" class="form-label">Review:</label>
