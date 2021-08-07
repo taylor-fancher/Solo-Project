@@ -1,0 +1,55 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Retail Review - Search Results</title>
+</head>
+
+<body>
+    <div class="container p-1">
+        <p class="text-end"><a href="/home">Home</a> | <a href="/profile">Your Account</a> | <a
+                href="/logout">Logout</a></p>
+        <h2>Search Results</h2>
+        <div class="search">
+            <form action="/reviews/search" method="POST">
+                {% csrf_token %}
+                <label for="search" class="form-label">Make another search:</label>
+                <input type="text" class='form-control' name='query'>
+                <input type="submit" class="btn btn-success mt-3">
+            </form>
+        </div>
+        {% if users %}
+        {% for user in users %}
+        <div class="users border border-3 border-dark m-2 p-2">
+            <h4><a href="/user/{{user.id}}"> {{user.first_name}} {{user.last_name}}</a></h4>
+            <p>Has written {{user.written_reviews.count}} review(s).</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if retailers %}
+        {% for retailer in retailers %}
+        <div class="retailer border border-3 border-dark m-2 p-2">
+            <h4><a href="/retailer/{{retailer.id}}">{{retailer.retailer}}</a></h4>
+            <p>Has been reviewed {{retailer.reviews.count}} time(s).</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if reviews %}
+        {% for review in reviews %}
+        <div class="review border border-3 border-dark m-2 p-2">
+            <h4><a href="/retailer/{{review.retailer.id}}">{{review.retailer.retailer}}</a></h4>
+            <h6>{{review.retailer.type}} | {{review.retailer.specialty}} | {{review.retailer.city}},
+                {{review.retailer.state}}</h6>
+            <p>{{review.review}}</p>
+            <p>Written by <a href="user/{{review.author.id}}">{{review.author.first_name}}</a> on
+                {{review.created_at}}</p>
+            <p><a href="/review/{{review.id}}/like2">Like</a> | {{review.likes.count}} Like(s)</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</body>

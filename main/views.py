@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
+from django.db.models import Q
 import bcrypt
 
 
@@ -180,9 +181,24 @@ def create_review2(request):
 def reviews(request):
     context = {
         'user': User.objects.get(id=request.session['log_user_id']),
-        'reviews': Review.objects.all()
+        'reviews': Review.objects.all(),
+        'users': User.objects.all(),
+        'retailers': Retailer.objects.all(),
     }
     return render(request, 'reviews.html', context)
+
+def search(request):
+    query = request.POST['query']
+    users = User.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
+    retailers = Retailer.objects.filter(Q(retailer__icontains=query) | Q(type__icontains=query) | Q(specialty__icontains=query))
+    reviews = Review.objects.filter(Q(review__icontains=query))
+    context = {
+        'user': User.objects.get(id=request.session['log_user_id']),
+        'users': users,
+        'retailers': retailers,
+        'reviews': reviews
+    }
+    return render(request, 'search_results.html', context)
 
 def retailers(request):
     context = {

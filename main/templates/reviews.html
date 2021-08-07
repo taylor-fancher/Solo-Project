@@ -10,18 +10,31 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container p-1">
         <p class="text-end"><a href="/home">Home</a> | <a href="/profile">Your Account</a> | <a
-            href="/logout">Logout</a></p>
+                href="/logout">Logout</a></p>
         <h2>All Reviews</h2>
-        {% for review in reviews %}
-        <div class="review border border-3 border-dark m-2 p-2">
-            <h4><a href="/retailer/{{review.retailer.id}}">{{review.retailer.retailer}}</a></h4>
-            <h6>{{review.retailer.type}} | {{review.retailer.specialty}} | {{review.retailer.city}}, {{review.retailer.state}}</h6>
-            <p>{{review.review}}</p>
-            <p>Written by <a href="user/{{review.author.id}}">{{review.author.first_name}}</a> on {{review.created_at}}</p>
-            <p><a href="/review/{{review.id}}/like2">Like</a> | {{review.likes.count}} Like(s)</p>
+        <div class="search">
+            <form action="/reviews/search" method="POST">
+            {% csrf_token %}
+            <label for="search" class="form-label">Search:</label>
+            <input type="text" class='form-control' name='query'>
+            <input type="submit" class="btn btn-success mt-3">
+            </form>
         </div>
-        {% endfor %}
+        <div class="reviews">
+            {% for review in reviews %}
+            <div class="review border border-3 border-dark m-2 p-2">
+                <h4><a href="/retailer/{{review.retailer.id}}">{{review.retailer.retailer}}</a></h4>
+                <h6>{{review.retailer.type}} | {{review.retailer.specialty}} | {{review.retailer.city}},
+                    {{review.retailer.state}}</h6>
+                <p>{{review.review}}</p>
+                <p>Written by <a href="user/{{review.author.id}}">{{review.author.first_name}}</a> on
+                    {{review.created_at}}</p>
+                <p><a href="/review/{{review.id}}/like2">Like</a> | {{review.likes.count}} Like(s)</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     </div>
 </body>
