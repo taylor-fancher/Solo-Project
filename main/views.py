@@ -98,7 +98,7 @@ def delete_user(request, id):
 def user(request, id):
     context = {
         'author': User.objects.get(id=id),
-        'reviews': Review.objects.filter(author=id)
+        'reviews': Review.objects.filter(author=id),
     }
     return render(request, 'user.html', context)
 

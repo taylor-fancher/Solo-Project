@@ -13,24 +13,28 @@
     <div class="container">
         <p class="text-end"><a href="/home">Home</a> | <a href="/profile">Your Account</a> | <a
                 href="/logout">Logout</a></p>
-        <h2>Reviews by {{author.first_name}}</h2>
-        <div class="about border border-3 border-dark m-2 p-2">
-            <h4>About this reviewer:</h4>
-            <p>{{author.first_name}} {{author.last_name}}</p>
-            <p>{{author.email}}</p>
-            <p>Joined: {{author.created_at}}</p>
-        </div>
-        <div class="all-reviews ">
-            <h4>Reviews written by this user:</h4>
-            {% for review in reviews %}
-            <div class="review border border-3 border-dark mb-2 p-2">
-                <h6><a href="/retailer/{{review.retailer.id}}">{{review.retailer.retailer}}</a></h6>
-                <p>{{review.retailer.type}} | {{review.retailer.specialty}} | {{review.retailer.city}},
-                    {{review.retailer.state}}</p>
-                <p>{{review.review}}</p>
-                <p><a href="/review/{{review.id}}/like4">Like</a> | {{review.likes.count}} Like(s)</p>
+        <h2>Reviews by {{author.first_name}} {{author.last_name}}</h2>
+        <div class="row">
+            <div class="reviews col-md-8">
+                <div class="about border border-3 border-dark m-2 p-2">
+                    <h4>About this reviewer:</h4>
+                    <p>{{author.first_name}} {{author.last_name}}</p>
+                    <p>{{author.email}}</p>
+                    <p>Joined: {{author.created_at}}</p>
+                    <p><a href="/follow/{{author.id}}">Follow this reviewer</a></p>
+                </div>
+                <div class="all-reviews ">
+                    <h4>Reviews written by this user:</h4>
+                    {% for review in reviews %}
+                    <div class="review border border-3 border-dark m-2 p-2">
+                        <h6><a href="/retailer/{{review.retailer.id}}">{{review.retailer.retailer}}</a></h6>
+                        <p>{{review.retailer.type}} | {{review.retailer.specialty}} | {{review.retailer.city}},
+                            {{review.retailer.state}}</p>
+                        <p>{{review.review}}</p>
+                        <p><a href="/review/{{review.id}}/like4">Like</a> | {{review.likes.count}} Like(s)</p>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
 </body>
